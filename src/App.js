@@ -1,37 +1,41 @@
 import "./styles.scss";
-import Login from "./components/Login";
 import React from "react";
+import Login from "./components/Login";
 import BubblePage from "./components/BubblePage";
 import PrivateRoute from "./components/PrivateRoute";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-const logout = () => {
-  localStorage.removeItem("token");
-  window.location.href = "login";
-};
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { axiosWithAuth } from "./helpers/axiosWithAuth";
 
 function App() {
+  const logout = () => {
+    axiosWithAuth()
+      .post("http://localhost:5000/api/logout")
+      .then((res) => {
+        console.log("logout res:", res);
+        localStorage.removeItem("token");
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  };
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <a data-testid="logoutButton" href="/" onClick={logout}>
-            Logout
+          <a onClick={logout} data-testid="logoutButton" href="#">
+            logout
           </a>
         </header>
-        <Switch>
-          <PrivateRoute exact path="/BubblePage" component={BubblePage} />
-          <Route exact path="/" component={Login} />
-          <Route path="/login" component={Login} />
-        </Switch>
+        <PrivateRoute exact path="/bubbles" component={BubblePage} />
+        <Route exact path="/" component={Login} />
       </div>
     </Router>
   );
 }
 
 export default App;
-
 //Task List:
 //1. Add in two routes that link to the Login Component, one for the default path '/' and one for the '/login'.
 //2. Render BubblePage as a PrivateRoute
