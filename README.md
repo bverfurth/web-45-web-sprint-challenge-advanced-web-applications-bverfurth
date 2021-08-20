@@ -30,10 +30,10 @@ In this project you will create a login page and request a token from the server
 
 ### Task 2: CodeGrade Setup
 
-- [ ] Open the assignment in Canvas and click on the "Set up git" option.
-- [ ] Follow instructions to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>`.
-- [ ] Push your first commit: `git commit --allow-empty -m "first commit" && git push`
-- [ ] Check to see that Codegrade has accepted your git submission.
+- [x] Open the assignment in Canvas and click on the "Set up git" option.
+- [x] Follow instructions to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>`.
+- [x] Push your first commit: `git commit --allow-empty -m "first commit" && git push`
+- [x] Check to see that Codegrade has accepted your git submission.
 
 ### Task 3: Project Requirements
 
@@ -45,13 +45,13 @@ Your finished project must include all of the following requirements. **Unlike o
 
 > _Build a login form to authenticate your users along with all the components and utilities needed to support authentication._
 
-- [ ] In `Login.js`, build all UI and state functionality needed to capture a username and password.
-- [ ] Add in two routes that display the login component, one for the default path '/' and one for the login path '/login'.
-- [ ] **Make sure that the input for your username and password includes the id="username" and id="password" attributes. Codegrade autotests will fail without them.**
+- [x] In `Login.js`, build all UI and state functionality needed to capture a username and password.
+- [x] Add in two routes that display the login component, one for the default path '/' and one for the login path '/login'.
+- [x] **Make sure that the input for your username and password includes the id="username" and id="password" attributes. Codegrade autotests will fail without them.**
 - [ ] Build in functionality that would allow an error to be displayed in the provided p tag if either the username or password is incorrect.
-- [ ] **Make sure your error p tag has an id="error" attribute attached. Codegrade autotests will fail without them.**
-- [ ] Construct an http request that retrieves an auth token from the server when the username `Lambda` and the password `School` is passed into the request.
-- [ ] Save the token to localStorage.
+- [x] **Make sure your error p tag has an id="error" attribute attached. Codegrade autotests will fail without them.**
+- [x] Construct an http request that retrieves an auth token from the server when the username `Lambda` and the password `School` is passed into the request.
+- [x] Save the token to localStorage.
 - [ ] Build a `axiosWithAuth` module within the helpers folder to create an instance of axios with the authentication header.
 - [ ] Build a `PrivateRoute` component within the components folder and use it to protect the route that renders the `BubblesPage` component.
 - [ ] In `App.js`, build the backend to the logout button. When pressed, send an http request to the logout endpoint and remove the authentication token from localStorage. Use window.location.href to redirect to the login page.
