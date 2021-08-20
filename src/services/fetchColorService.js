@@ -4,8 +4,7 @@ const fetchColorService = () => {
   return axiosWithAuth()
     .get("/api/colors")
     .then((res) => {
-      console.log("fetchColorService", res);
-
+      console.log(res);
       return res.data;
     })
     .catch((error) => {

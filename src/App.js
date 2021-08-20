@@ -1,28 +1,30 @@
 import "./styles.scss";
 import Login from "./components/Login";
-import React, { useState } from "react";
-import PrivateRoute from "./components/PrivateRoute";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
 import BubblePage from "./components/BubblePage";
+import PrivateRoute from "./components/PrivateRoute";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+const logout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "login";
+};
 
 function App() {
-  const logout = () => {
-    localStorage.removeItem("token");
-  };
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <a
-            onClick={logout}
-            data-testid="logoutButton"
-            href="http://localhost:3000"
-          >
-            logout
+          <a data-testid="logoutButton" href="/" onClick={logout}>
+            Logout
           </a>
         </header>
-        <PrivateRoute exact path="/bubblepage" component={BubblePage} />
+        <Switch>
+          <PrivateRoute exact path="/BubblePage" component={BubblePage} />
+          <Route exact path="/" component={Login} />
+          <Route path="/login" component={Login} />
+        </Switch>
       </div>
     </Router>
   );

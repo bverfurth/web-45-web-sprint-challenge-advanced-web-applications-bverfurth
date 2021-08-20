@@ -48,7 +48,7 @@ Your finished project must include all of the following requirements. **Unlike o
 - [x] In `Login.js`, build all UI and state functionality needed to capture a username and password.
 - [x] Add in two routes that display the login component, one for the default path '/' and one for the login path '/login'.
 - [x] **Make sure that the input for your username and password includes the id="username" and id="password" attributes. Codegrade autotests will fail without them.**
-- [ ] Build in functionality that would allow an error to be displayed in the provided p tag if either the username or password is incorrect.
+- [x] Build in functionality that would allow an error to be displayed in the provided p tag if either the username or password is incorrect.
 - [x] **Make sure your error p tag has an id="error" attribute attached. Codegrade autotests will fail without them.**
 - [x] Construct an http request that retrieves an auth token from the server when the username `Lambda` and the password `School` is passed into the request.
 - [x] Save the token to localStorage.
@@ -67,7 +67,7 @@ Your finished project must include all of the following requirements. **Unlike o
 
 #### Testing
 
-- [ ] Finish the test in `Color.test.js`, `ColorList.test.js`, `BubblePage.test.js`. You will need to use rerendering, function mocking and spies in order to complete.
+- [x] Finish the test in `Color.test.js`, `ColorList.test.js`, `BubblePage.test.js`. You will need to use rerendering, function mocking and spies in order to complete.
 
 **Notes:**
 

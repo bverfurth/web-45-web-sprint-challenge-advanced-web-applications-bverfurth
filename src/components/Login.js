@@ -1,45 +1,32 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../helpers/axiosWithAuth";
 
-const initialValues = {
-  username: "",
-  password: "",
-};
+const Login = (props) => {
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    password: "",
+  });
 
-const Login = () => {
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
-  const { push } = useHistory();
-  const [formValues, setFormValues] = useState(initialValues);
   const [error, setError] = useState();
 
-  // const error = "";
-  //replace with error state
   const handleChange = (e) => {
-    setFormValues({
-      ...formValues,
+    setUserInfo({
+      ...userInfo,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formValues.username !== "Lambda" || formValues.password !== "School") {
-      setError("Username or Password Not Valid");
-    }
-
-    axiosWithAuth()
-      .post("/api/login", formValues)
+    axios
+      .post("http://localhost:5000/api/login", userInfo)
       .then((res) => {
-        console.log("Axios Login", res);
         localStorage.setItem("token", res.data.payload);
-        push("/bubblepage");
+        props.history.push("/bubbles");
       })
-
-      .catch((error) => {
-        console.log({ error });
-      });
+      .catch((error) => setError(error.response.data.error));
   };
 
   return (
@@ -56,7 +43,7 @@ const Login = () => {
             id="username"
             data-testid="username"
             name="username"
-            value={formValues.username}
+            value={userInfo.username}
             onchange={handleChange}
           />
           <label htmlFor="password">Password</label>
@@ -65,10 +52,10 @@ const Login = () => {
             id="password"
             data-testid="password"
             name="password"
-            value={formValues.password}
+            value={userInfo.password}
             onchange={handleChange}
           />
-          <button>Login</button>
+          <button id="submit">Login</button>
         </form>
       </div>
 
