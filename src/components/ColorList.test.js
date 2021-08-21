@@ -1,27 +1,47 @@
 import React from "react";
-import ColorList from "./ColorList";
-import { render, screen } from "@testing-library/react";
-import Color from "./Color";
-import userEvent from "@testing-library/user-event";
+import MutationObserver from "mutationobserver-shim";
 
-const testColor = {
-  color: "aqua",
-  code: { hex: "#00ffff" },
-  id: 1,
-};
+import { render, screen } from "@testing-library/react";
+import ColorList from "./ColorList";
+
+const testColors = [
+  {
+    code: {
+      hex: "#f0f8ff",
+    },
+    color: "aliceblue",
+    id: 1,
+  },
+  {
+    code: {
+      hex: "#f0f8ff",
+    },
+    color: "aliceblue",
+    id: 2,
+  },
+  {
+    code: {
+      hex: "#f0f8ff",
+    },
+    color: "aliceblue",
+    id: 3,
+  },
+];
 
 test("Renders an empty list of colors without errors", () => {
-  render(<ColorList color={noColor} />);
+  render(<ColorList colors={testColors} />);
 });
 
 test("Renders a list of colors without errors", () => {
-  render(<ColorList color={testColor} />);
+  render(<ColorList colors={testColors} />);
 });
 
 test("Renders the EditForm when editing = true and does not render EditForm when editing = false", () => {
-  const toggleEdit = jest.fn();
-  render(<ColorList color={testColor} />);
-  let editing = screen.queryAllByTestId("color");
-  userEvent.click(editing);
-  expect(toggleEdit).toBeCalled();
+  render(<ColorList colors={testColors} editing={true} />);
+  const editMenu = screen.queryByTestId("edit_menu");
+  expect(editMenu).toBeInTheDocument();
+
+  render(<ColorList colors={testColors} editing={false} />);
+  const editMenu_2 = screen.queryByTestId("edit_menu");
+  expect(editMenu_2).toBeNull();
 });

@@ -9,48 +9,33 @@ const BubblePage = () => {
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
-    fetchColorService()
-      .then((res) => {
-        setColors(res.data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+    fetchColorService(setColors);
   }, []);
+
   const toggleEdit = (value) => {
     setEditing(value);
   };
 
   const saveEdit = (editColor) => {
+    const id = editColor.id;
     axiosWithAuth()
-      .put(`http://localhost:5000/api/colors/${editColor.id}`, editColor)
+      .put(`http://localhost:5000/api/colors/${id}`, editColor)
       .then((res) => {
-        const newColors = colors.map((color) => {
-          if (color.id === editColor.id) {
-            return editColor;
-          } else {
-            return color;
-          }
-        });
-        setColors(newColors);
+        fetchColorService(setColors);
+        console.log(res);
       })
-      .catch((err) => {
-        console.log("err:", err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const deleteColor = (colorToDelete) => {
+    const id = colorToDelete.id;
     axiosWithAuth()
-      .delete(`http://localhost:5000/api/colors/${colorToDelete.id}`)
+      .delete(`http://localhost:5000/api/colors/${id}`)
       .then((res) => {
-        const newColors = colors.filter(
-          (color) => color.id !== JSON.parse(res.data)
-        );
-        setColors(newColors);
+        fetchColorService(setColors);
+        console.log(res);
       })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
